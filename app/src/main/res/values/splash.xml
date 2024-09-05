@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.SplashScreen.IconBackground." parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/c3</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/voologoblc</item>
+        <item name="windowSplashScreenAnimationDuration">500</item>
+        <item name="postSplashScreenTheme">@style/Theme.Voo_app_frontend</item>
+    </style>
+</resources>
