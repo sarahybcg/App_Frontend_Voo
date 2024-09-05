@@ -109,4 +109,5 @@ dependencies {
     // Mapbox
     implementation("com.mapbox.maps:android:11.6.0")
     implementation("com.mapbox.extension:maps-compose:11.6.0")
+
 }
