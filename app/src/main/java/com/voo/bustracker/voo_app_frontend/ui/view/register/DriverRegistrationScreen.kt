@@ -2,7 +2,9 @@ package com.voo.bustracker.voo_app_frontend.ui.view.register
 
 
 import androidx.compose.foundation.layout.*
-
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -12,15 +14,14 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
-import com.voo.bustracker.voo_app_frontend.components.login.Button
-import com.voo.bustracker.voo_app_frontend.components.register.*
+import com.voo.bustracker.voo_app_frontend.components.register.CountryCodeDropdown
+import com.voo.bustracker.voo_app_frontend.components.register.DatePickerComponent
+import com.voo.bustracker.voo_app_frontend.components.register.ImageUploadComponent
+import com.voo.bustracker.voo_app_frontend.components.register.TextFieldComponent
+import com.voo.bustracker.voo_app_frontend.navigation.Screen
 import com.voo.bustracker.voo_app_frontend.ui.theme.DarkBlue
 import com.voo.bustracker.voo_app_frontend.ui.theme.White
 import com.voo.bustracker.voo_app_frontend.viewmodel.DriverViewModel
-import androidx.compose.material3.Button
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.foundation.rememberScrollState
-import com.voo.bustracker.voo_app_frontend.navigation.Screen
 
 
 @Composable
@@ -126,7 +127,7 @@ fun DriverRegistrationScreen(navController: NavHostController) {
                 Button(
                     onClick = {
                         viewModel.onDriver()
-                        navController.navigate(Screen.HomeDriver.route)
+                        navController.navigate(Screen.SendFriendRequest.route)
                     },
                     modifier = Modifier.fillMaxWidth()
                 ) {

@@ -8,4 +8,5 @@ sealed class Screen(val route: String) {
     data object DriverRegister : Screen("driver_register")
     data object PassengerRegister : Screen("passenger_register")
     data object HomeDriver : Screen("home_driver")
+    data object SendFriendRequest : Screen("send_friend")
 }

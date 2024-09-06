@@ -1,5 +1,6 @@
 package com.voo.bustracker.voo_app_frontend.ui.view.register
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -18,6 +19,7 @@ import com.voo.bustracker.voo_app_frontend.ui.theme.DarkBlue
 import com.voo.bustracker.voo_app_frontend.ui.theme.White
 import com.voo.bustracker.voo_app_frontend.viewmodel.PassengerViewModel
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun PassengerRegistrationScreen(navController: NavHostController) {
     val viewModel: PassengerViewModel = viewModel()
