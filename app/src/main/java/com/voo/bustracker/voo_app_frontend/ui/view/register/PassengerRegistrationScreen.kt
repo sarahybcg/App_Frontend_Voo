@@ -48,8 +48,8 @@ fun PassengerRegistrationScreen(navController: NavHostController) {
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     TextFieldComponent(
-                        value = viewModel.userInput.value.name,
-                        onValueChange = { viewModel.updateUserInput(viewModel.userInput.value.copy(name = it)) },
+                        value = viewModel.datosPrincipales.value.nombre,
+                        onValueChange = { viewModel.updateDatosPrincipales(viewModel.datosPrincipales.value.copy(nombre = it)) },
                         label = "Nombre",
                         keyboardType = KeyboardType.Text,
                         modifier = Modifier
@@ -58,8 +58,8 @@ fun PassengerRegistrationScreen(navController: NavHostController) {
                     )
 
                     TextFieldComponent(
-                        value = viewModel.userInput.value.surname,
-                        onValueChange = { viewModel.updateUserInput(viewModel.userInput.value.copy(surname = it)) },
+                        value = viewModel.datosPrincipales.value.apellido,
+                        onValueChange = { viewModel.updateDatosPrincipales(viewModel.datosPrincipales.value.copy(apellido = it)) },
                         label = "Apellido",
                         keyboardType = KeyboardType.Text,
                         modifier = Modifier
@@ -81,8 +81,8 @@ fun PassengerRegistrationScreen(navController: NavHostController) {
                     )
 
                     TextFieldComponent(
-                        value = viewModel.userInput.value.phone,
-                        onValueChange = { viewModel.updateUserInput(viewModel.userInput.value.copy(phone = it)) },
+                        value = viewModel.datosPrincipales.value.telefono_,
+                        onValueChange = { viewModel.updateDatosPrincipales(viewModel.datosPrincipales.value.copy(telefono_ = it)) },
                         label = "Teléfono",
                         keyboardType = KeyboardType.Phone,
                         modifier = Modifier
@@ -93,13 +93,20 @@ fun PassengerRegistrationScreen(navController: NavHostController) {
 
                 DatePickerComponent(
                     label = "Fecha de Nacimiento",
-                    date = viewModel.userInput.value.birthDate,
-                    onDateChange = { viewModel.updateUserInput(viewModel.userInput.value.copy(birthDate = it)) }
+                    date = viewModel.stringToCalendar(viewModel.datosPrincipales.value.fechaNacimiento), // Convertir de String a Calendar
+                    onDateChange = { newDate ->
+                        viewModel.updateDatosPrincipales(
+                            viewModel.datosPrincipales.value.copy(
+                                fechaNacimiento = viewModel.calendarToString(newDate) // Convertir de Calendar a String
+                            )
+                        )
+                    }
                 )
 
+
                 TextFieldComponent(
-                    value = viewModel.userInput.value.id,
-                    onValueChange = { viewModel.updateUserInput(viewModel.userInput.value.copy(id = it)) },
+                    value = viewModel.datosPrincipales.value.CI_,
+                    onValueChange = { viewModel.updateDatosPrincipales(viewModel.datosPrincipales.value.copy(CI_ = it)) },
                     label = "Cédula",
                     keyboardType = KeyboardType.Number,
                     modifier = Modifier
@@ -109,8 +116,8 @@ fun PassengerRegistrationScreen(navController: NavHostController) {
                 Spacer(modifier = Modifier.height(16.dp))
 
                 TextFieldComponent(
-                    value = viewModel.userInput.value.password,
-                    onValueChange = { viewModel.updateUserInput(viewModel.userInput.value.copy(password = it)) },
+                    value = viewModel.datosPrincipales.value.clave,
+                    onValueChange = { viewModel.updateDatosPrincipales(viewModel.datosPrincipales.value.copy(clave = it)) },
                     label = "Contraseña",
                     keyboardType = KeyboardType.Password,
                     modifier = Modifier

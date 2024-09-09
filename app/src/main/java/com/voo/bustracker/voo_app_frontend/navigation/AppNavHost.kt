@@ -11,14 +11,20 @@ import com.voo.bustracker.voo_app_frontend.ui.view.login.LoginScreen
 import com.voo.bustracker.voo_app_frontend.ui.view.onboarding.DriverOnboardingScreen
 import com.voo.bustracker.voo_app_frontend.ui.view.onboarding.PassengerOnboardingScreen
 import com.voo.bustracker.voo_app_frontend.ui.view.profile.driver.SendFriendRequest
-import com.voo.bustracker.voo_app_frontend.ui.view.register.DriverRegistrationScreen
+//import com.voo.bustracker.voo_app_frontend.ui.view.register.DriverRegistrationScreen
 import com.voo.bustracker.voo_app_frontend.ui.view.register.PassengerRegistrationScreen
 import com.voo.bustracker.voo_app_frontend.ui.view.selection.SelectionScreen
 
-@RequiresApi(Build.VERSION_CODES.Q)
 @Composable
-fun AppNavGraph(navController: NavHostController) {
-    NavHost(navController = navController, startDestination = Screen.Login.route) {
+@RequiresApi(Build.VERSION_CODES.Q) // Esto asegura que la función solo se use en API 29 o superior
+fun AppNavGraph(navController: NavHostController, isLoggedIn: Boolean) {
+    val startDestination = if (isLoggedIn) {
+        Screen.HomeDriver.route
+    } else {
+        Screen.Login.route
+    }
+
+    NavHost(navController = navController, startDestination = startDestination) {
         composable(Screen.Login.route) {
             LoginScreen(navController)
         }
@@ -32,7 +38,7 @@ fun AppNavGraph(navController: NavHostController) {
             DriverOnboardingScreen(navController)
         }
         composable(Screen.DriverRegister.route) {
-            DriverRegistrationScreen(navController)
+//            DriverRegistrationScreen(navController)
         }
         composable(Screen.PassengerRegister.route) {
             PassengerRegistrationScreen(navController)
@@ -40,13 +46,17 @@ fun AppNavGraph(navController: NavHostController) {
         composable(Screen.HomeDriver.route) {
             HomeDriver()
         }
-        composable(Screen.SendFriendRequest.route) {
-            SendFriendRequest(
-                onSendRequest = { username ->
-                    println("Solicitud de amistad enviada a $username")
-                },
-                navController = navController
-            )
+
+        // Condicionalmente agrega SendFriendRequest solo si la API es 29 o superior
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            composable(Screen.SendFriendRequest.route) {
+                SendFriendRequest(
+                    onSendRequest = { username ->
+                        println("Solicitud de amistad enviada a $username")
+                    },
+                    navController = navController
+                )
+            }
         }
     }
 }

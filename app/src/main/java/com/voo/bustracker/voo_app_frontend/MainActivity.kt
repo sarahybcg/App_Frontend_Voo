@@ -1,51 +1,45 @@
 package com.voo.bustracker.voo_app_frontend
 
-import android.os.Bundle
-import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.ui.tooling.preview.Preview
-import com.voo.bustracker.voo_app_frontend.ui.theme.Voo_app_frontendTheme
+import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
-import android.os.Handler
-import android.os.Looper
+import android.net.Uri
+import android.os.Build
+import android.os.Bundle
+import android.provider.Settings
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.voo.bustracker.voo_app_frontend.ui.theme.Voo_app_frontendTheme
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.compose.rememberNavController
 import com.voo.bustracker.voo_app_frontend.navigation.AppNavGraph
-import android.Manifest
-import android.content.Intent
-import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.Button
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import android.net.Uri
-import androidx.compose.ui.platform.LocalContext
-import android.provider.Settings
-
+import com.voo.bustracker.voo_app_frontend.network.RetrofitClient
+import com.voo.bustracker.voo_app_frontend.ui.theme.Voo_app_frontendTheme
 
 class MainActivity : ComponentActivity() {
 
     private lateinit var locationPermissionLauncher: ActivityResultLauncher<String>
     private var showDialog by mutableStateOf(false)
+    private var isLoggedIn by mutableStateOf(false) // Simula el estado de inicio de sesión
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        RetrofitClient.initialize(this)
 
         // Initialize permission launcher
         locationPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
@@ -68,9 +62,19 @@ class MainActivity : ComponentActivity() {
             Voo_app_frontendTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     val navController = rememberNavController()
-                    AppNavGraph(navController = navController)
 
-                    // Show dialog if needed
+                    // Aplicar innerPadding al contenedor del contenido
+                    Box(modifier = Modifier.padding(innerPadding)) {
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                            AppNavGraph(navController = navController, isLoggedIn = isLoggedIn)
+                        } else {
+                            // Manejar versiones de Android más bajas si es necesario
+                            // Mostrar una pantalla alternativa o mensaje de error si no se soportan ciertas funciones
+                            Text(text = "Esta aplicación requiere una versión de Android superior para funcionar correctamente.")
+                        }
+                    }
+
+                    // Mostrar el diálogo de permisos si es necesario
                     if (showDialog) {
                         LocationPermissionDialog(onDismiss = { showDialog = false })
                     }
@@ -82,7 +86,6 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun LocationPermissionDialog(onDismiss: () -> Unit) {
-    // Correct use of LocalContext.current inside a composable function
     val context = LocalContext.current
 
     AlertDialog(
@@ -106,9 +109,7 @@ fun LocationPermissionDialog(onDismiss: () -> Unit) {
             }
         },
         dismissButton = {
-            Button(
-                onClick = onDismiss
-            ) {
+            Button(onClick = onDismiss) {
                 Text("Cancelar")
             }
         }

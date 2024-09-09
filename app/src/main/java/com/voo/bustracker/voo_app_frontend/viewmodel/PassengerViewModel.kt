@@ -3,20 +3,39 @@ package com.voo.bustracker.voo_app_frontend.viewmodel
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import com.voo.bustracker.voo_app_frontend.model.entities.CountryCode
-import com.voo.bustracker.voo_app_frontend.model.entities.UserInput
+import com.voo.bustracker.voo_app_frontend.model.entities.DatosPrincipales
 import com.voo.bustracker.voo_app_frontend.utils.CountryCodeData
-import com.voo.bustracker.voo_app_frontend.utils.Validator
+import java.text.ParseException
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class PassengerViewModel : ViewModel() {
-    var userInput = mutableStateOf(UserInput())
+    var datosPrincipales = mutableStateOf(DatosPrincipales(CI_="", nombre="", apellido="", telefono_="", fechaNacimiento="", clave="", role="",))
         private set
 
     var errorMessage = mutableStateOf<String?>(null)
         private set
+    private val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
 
-    fun updateUserInput(newInput: UserInput) {
-        userInput.value = newInput
+    // Convierte de Calendar a String
+    fun calendarToString(calendar: Calendar): String {
+        return dateFormat.format(calendar.time)
+    }
+
+    // Convierte de String a Calendar
+    fun stringToCalendar(date: String): Calendar {
+        val calendar = Calendar.getInstance()
+        try {
+            calendar.time = dateFormat.parse(date) ?: Calendar.getInstance().time
+        } catch (e: ParseException) {
+            e.printStackTrace()
+        }
+        return calendar
+    }
+
+    fun updateDatosPrincipales(newDatosPrincipales: DatosPrincipales) {
+        datosPrincipales.value = newDatosPrincipales
     }
 
     var selectedCountryCode = mutableStateOf<CountryCode?>(null)
@@ -27,45 +46,7 @@ class PassengerViewModel : ViewModel() {
         selectedCountryCode.value = countryCode
     }
 
-    fun validateInput(): Boolean {
-        val user = userInput.value
-
-        if (!Validator.isNotEmpty(user.name)) {
-            errorMessage.value = "El nombre no puede estar vacío"
-            return false
-        }
-        if (!Validator.isNotEmpty(user.surname)) {
-            errorMessage.value = "El apellido no puede estar vacío"
-            return false
-        }
-        if (!Validator.isNameValid(user.name) || !Validator.isNameValid(user.surname)) {
-            errorMessage.value = "El nombre o apellido contiene caracteres inválidos"
-            return false
-        }
-        if (!Validator.isPhoneValid(user.phone)) {
-            errorMessage.value = "El número de teléfono no es válido"
-            return false
-        }
-        if (!Validator.isCedulaValid(user.id, isVenezuelan = true)) {
-            errorMessage.value = "La cédula no es válida"
-            return false
-        }
-        if (!Validator.isPasswordSecure(user.password)) {
-            errorMessage.value = "La contraseña no es segura"
-            return false
-        }
-        if (!user.termsAccepted) {
-            errorMessage.value = "Debe aceptar los términos y condiciones"
-            return false
-        }
-
-        errorMessage.value = null // No hay errores
-        return true
-    }
-
     fun onPassenger() {
-        if (validateInput()) {
-            // Lógica de registro
-        }
+
     }
 }

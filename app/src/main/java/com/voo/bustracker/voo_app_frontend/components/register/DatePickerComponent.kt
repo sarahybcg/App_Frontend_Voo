@@ -1,19 +1,15 @@
 package com.voo.bustracker.voo_app_frontend.components.register
 
 
-import androidx.compose.ui.Modifier
-import java.text.SimpleDateFormat
-import java.util.*
 import android.app.DatePickerDialog
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
-import androidx.compose.material3.DropdownMenu
-import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.unit.dp
+import java.text.SimpleDateFormat
+import java.util.*
 
 @Composable
 fun DatePickerComponent(
@@ -23,7 +19,7 @@ fun DatePickerComponent(
 ) {
     val context = LocalContext.current
 
-
+    // Function to show DatePickerDialog
     fun showDatePicker(initialDate: Calendar) {
         DatePickerDialog(
             context,
@@ -38,9 +34,13 @@ fun DatePickerComponent(
         ).show()
     }
 
+    // Format the date if available, otherwise show the label
     val displayDate = date?.let { formatDate(it) } ?: label
+
+    // Set initial date to current date if null
     val initialDate = date ?: Calendar.getInstance()
 
+    // Display the date in a Text component
     Text(
         text = displayDate,
         modifier = Modifier
@@ -49,10 +49,11 @@ fun DatePickerComponent(
     )
 }
 
-
+// Function to format the date from Calendar to String
 private fun formatDate(date: Calendar): String {
     val format = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
     return format.format(date.time)
 }
+
 
 
