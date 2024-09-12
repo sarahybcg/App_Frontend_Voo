@@ -79,6 +79,8 @@ dependencies {
     // LIFECYCLE RUNTIME
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.4")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.4")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.8.4")
+    implementation("androidx.compose.runtime:runtime-livedata:1.7.0")// Asegúrate de usar la versión correcta de Compose
 
     // COIL (para imágenes)
     implementation("io.coil-kt:coil-compose:2.2.2")
@@ -98,10 +100,12 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.9.3")
-
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
     // Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
-
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
     //icons
     implementation("androidx.compose.material:material-icons-extended:1.6.8")
 

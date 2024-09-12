@@ -35,7 +35,7 @@ fun DatePickerComponent(
     }
 
     // Format the date if available, otherwise show the label
-    val displayDate = date?.let { formatDate(it) } ?: label
+    val displayDate = date?.let { calendarToString(it) } ?: label
 
     // Set initial date to current date if null
     val initialDate = date ?: Calendar.getInstance()
@@ -50,9 +50,9 @@ fun DatePickerComponent(
 }
 
 // Function to format the date from Calendar to String
-private fun formatDate(date: Calendar): String {
-    val format = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-    return format.format(date.time)
+fun calendarToString(calendar: Calendar): String {
+    val format = SimpleDateFormat("yyyy/MM/dd", Locale.getDefault())
+    return format.format(calendar.time)
 }
 
 

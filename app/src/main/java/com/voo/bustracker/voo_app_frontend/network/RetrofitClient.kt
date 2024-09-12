@@ -7,7 +7,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitClient {
-    private const val BASE_URL = "http://192.168.0.105:8000/api/"
+    private const val BASE_URL = "http://192.168.1.13:8000/api/"
     private var sessionManager: SessionManager? = null
 
     fun initialize(context: Context) {
@@ -39,3 +39,5 @@ object RetrofitClient {
         return retrofit.create(ApiService::class.java)
     }
 }
+
+

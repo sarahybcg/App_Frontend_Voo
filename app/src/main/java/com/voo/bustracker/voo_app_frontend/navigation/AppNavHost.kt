@@ -6,18 +6,19 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.voo.bustracker.voo_app_frontend.model.repository.UserRepository
 import com.voo.bustracker.voo_app_frontend.ui.view.home.HomeDriver
 import com.voo.bustracker.voo_app_frontend.ui.view.login.LoginScreen
 import com.voo.bustracker.voo_app_frontend.ui.view.onboarding.DriverOnboardingScreen
 import com.voo.bustracker.voo_app_frontend.ui.view.onboarding.PassengerOnboardingScreen
 import com.voo.bustracker.voo_app_frontend.ui.view.profile.driver.SendFriendRequest
-//import com.voo.bustracker.voo_app_frontend.ui.view.register.DriverRegistrationScreen
-import com.voo.bustracker.voo_app_frontend.ui.view.register.PassengerRegistrationScreen
+import com.voo.bustracker.voo_app_frontend.ui.view.register.DriverRegistrationScreen
+//import com.voo.bustracker.voo_app_frontend.ui.view.register.PassengerRegistrationScreen
 import com.voo.bustracker.voo_app_frontend.ui.view.selection.SelectionScreen
 
 @Composable
 @RequiresApi(Build.VERSION_CODES.Q) // Esto asegura que la función solo se use en API 29 o superior
-fun AppNavGraph(navController: NavHostController, isLoggedIn: Boolean) {
+fun AppNavGraph(navController: NavHostController, isLoggedIn: Boolean, userRepository: UserRepository) {
     val startDestination = if (isLoggedIn) {
         Screen.HomeDriver.route
     } else {
@@ -38,10 +39,11 @@ fun AppNavGraph(navController: NavHostController, isLoggedIn: Boolean) {
             DriverOnboardingScreen(navController)
         }
         composable(Screen.DriverRegister.route) {
-//            DriverRegistrationScreen(navController)
+            DriverRegistrationScreen(navController, userRepository)
         }
+
         composable(Screen.PassengerRegister.route) {
-            PassengerRegistrationScreen(navController)
+//            PassengerRegistrationScreen(navController, userRepository)
         }
         composable(Screen.HomeDriver.route) {
             HomeDriver()

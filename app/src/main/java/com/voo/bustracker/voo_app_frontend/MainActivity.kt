@@ -27,6 +27,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.navigation.compose.rememberNavController
+import com.voo.bustracker.voo_app_frontend.model.repository.UserRepositoryImpl
 import com.voo.bustracker.voo_app_frontend.navigation.AppNavGraph
 import com.voo.bustracker.voo_app_frontend.network.RetrofitClient
 import com.voo.bustracker.voo_app_frontend.ui.theme.Voo_app_frontendTheme
@@ -39,7 +40,11 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Inicializa Retrofit y UserRepository
         RetrofitClient.initialize(this)
+        val apiService = RetrofitClient.create()
+        val userRepository = UserRepositoryImpl(apiService)  // Inicializar el UserRepository
 
         // Initialize permission launcher
         locationPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
@@ -66,10 +71,10 @@ class MainActivity : ComponentActivity() {
                     // Aplicar innerPadding al contenedor del contenido
                     Box(modifier = Modifier.padding(innerPadding)) {
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                            AppNavGraph(navController = navController, isLoggedIn = isLoggedIn)
+                            // Pasar el userRepository a AppNavGraph
+                            AppNavGraph(navController = navController, isLoggedIn = isLoggedIn, userRepository = userRepository)
                         } else {
                             // Manejar versiones de Android más bajas si es necesario
-                            // Mostrar una pantalla alternativa o mensaje de error si no se soportan ciertas funciones
                             Text(text = "Esta aplicación requiere una versión de Android superior para funcionar correctamente.")
                         }
                     }
@@ -83,6 +88,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+
 
 @Composable
 fun LocationPermissionDialog(onDismiss: () -> Unit) {
