@@ -36,13 +36,13 @@ fun TextFieldComponent(
         visualTransformation = visualTransformation,
         singleLine = isSingleLine, // Añadir control para una sola línea
         shape = Shapes().small,
-        colors = TextFieldDefaults.textFieldColors(
-            containerColor = Color.Transparent,
-            focusedIndicatorColor = Color.Blue, // Cambia a tu color deseado
-            unfocusedIndicatorColor = Color.Transparent,
-            disabledIndicatorColor = Color.Blue, // Cambia a tu color deseado
-            errorIndicatorColor = Color.Red
-        )
+//        colors = TextFieldDefaults.textFieldColors(
+//            containerColor = Color.Transparent,
+//            focusedIndicatorColor = Color.Blue, // Cambia a tu color deseado
+//            unfocusedIndicatorColor = Color.Transparent,
+//            disabledIndicatorColor = Color.Blue, // Cambia a tu color deseado
+//            errorIndicatorColor = Color.Red
+//        )
     )
 
     // Mostrar mensaje de error si existe

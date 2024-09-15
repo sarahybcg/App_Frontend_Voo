@@ -52,7 +52,7 @@ class LoginViewModel(private val sessionManager: SessionManager) : ViewModel() {
                     if (token != null) {
                         sessionManager.saveAuthToken(token)
                         // Navegar a la pantalla principal
-                        navController.navigate(Screen.SendFriendRequest.route)
+                        navController.navigate(Screen.BuscarUsuario.route)
                     } else {
                         loginError.value = "Token no recibido del servidor."
                     }

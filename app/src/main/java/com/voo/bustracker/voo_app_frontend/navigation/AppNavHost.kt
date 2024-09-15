@@ -11,7 +11,7 @@ import com.voo.bustracker.voo_app_frontend.ui.view.home.HomeDriver
 import com.voo.bustracker.voo_app_frontend.ui.view.login.LoginScreen
 import com.voo.bustracker.voo_app_frontend.ui.view.onboarding.DriverOnboardingScreen
 import com.voo.bustracker.voo_app_frontend.ui.view.onboarding.PassengerOnboardingScreen
-import com.voo.bustracker.voo_app_frontend.ui.view.profile.driver.SendFriendRequest
+import com.voo.bustracker.voo_app_frontend.ui.view.profile.driver.BuscarUsuarioScreen
 import com.voo.bustracker.voo_app_frontend.ui.view.register.DriverRegistrationScreen
 //import com.voo.bustracker.voo_app_frontend.ui.view.register.PassengerRegistrationScreen
 import com.voo.bustracker.voo_app_frontend.ui.view.selection.SelectionScreen
@@ -49,16 +49,8 @@ fun AppNavGraph(navController: NavHostController, isLoggedIn: Boolean, userRepos
             HomeDriver()
         }
 
-        // Condicionalmente agrega SendFriendRequest solo si la API es 29 o superior
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            composable(Screen.SendFriendRequest.route) {
-                SendFriendRequest(
-                    onSendRequest = { username ->
-                        println("Solicitud de amistad enviada a $username")
-                    },
-                    navController = navController
-                )
-            }
+        composable(Screen.BuscarUsuario.route) {
+            BuscarUsuarioScreen()
         }
     }
 }

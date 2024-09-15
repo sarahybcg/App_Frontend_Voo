@@ -38,16 +38,29 @@ fun DriverRegistrationScreen(navController: NavHostController, userRepository: U
         val scrollState = rememberScrollState()
         val registrationResult by viewModel.registrationResult.collectAsState()
 
-        LaunchedEffect(registrationResult) {
-            registrationResult?.let { result ->
-                if (result.isSuccess) {
-                    navController.navigate(Screen.SendFriendRequest.route)
-                } else {
-                    val errorMessage = result.exceptionOrNull()?.message ?: "Error desconocido"
-                    println("Error: $errorMessage")
+//        LaunchedEffect(registrationResult) {
+//            registrationResult?.let { result ->
+//                if (result.isSuccess) {
+//                    navController.navigate(Screen.SolicitudesRecibidas.route)
+//                } else {
+//                    val errorMessage = result.exceptionOrNull()?.message ?: "Error desconocido"
+//                    println("Error: $errorMessage")
+//                }
+//            }
+//        }
+    LaunchedEffect(registrationResult) {
+        registrationResult?.let { result ->
+            if (result.isSuccess) {
+                // Navegar a la pantalla de buscar propietario
+                navController.navigate("buscar_propietario") {
+                    popUpTo("driver_registration") { inclusive = true }
                 }
+            } else {
+                val errorMessage = result.exceptionOrNull()?.message ?: "Error desconocido"
+                println("Error: $errorMessage")
             }
         }
+    }
 
     Scaffold(
         containerColor = White

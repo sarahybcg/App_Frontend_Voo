@@ -51,12 +51,12 @@ fun CountryCodeDropdown(
         value = currentCountryCode.code,
         onValueChange = {},
         readOnly = true,
-        colors = TextFieldDefaults.textFieldColors(
-            containerColor = Color.Transparent,
-            disabledIndicatorColor = Color.Transparent, // Sin borde inferior
-            unfocusedIndicatorColor = Color.Transparent, // Sin borde inferior
-            focusedIndicatorColor = Color.Transparent // Sin borde inferior
-        ),
+//        colors = TextFieldDefaults.textFieldColors(
+//            containerColor = Color.Transparent,
+//            disabledIndicatorColor = Color.Transparent, // Sin borde inferior
+//            unfocusedIndicatorColor = Color.Transparent, // Sin borde inferior
+//            focusedIndicatorColor = Color.Transparent // Sin borde inferior
+//        ),
         textStyle = TextStyle(
             color = Color(0xFF080092),
             fontWeight = FontWeight.Bold // Establece el texto en negrita
@@ -97,10 +97,10 @@ fun CountryCodeDropdown(
                         onValueChange = { searchQuery = it },
                         label = { Text("Buscar") },
                         modifier = Modifier.fillMaxWidth(),
-                        colors = TextFieldDefaults.outlinedTextFieldColors(
-                            focusedBorderColor = Color.Gray,
-                            unfocusedBorderColor = Color.LightGray
-                        )
+//                        colors = TextFieldDefaults.outlinedTextFieldColors(
+//                            focusedBorderColor = Color.Gray,
+//                            unfocusedBorderColor = Color.LightGray
+//                        )
                     )
 
                     // Elementos del menú mostrando banderas y códigos

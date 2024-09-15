@@ -41,12 +41,12 @@ fun textInput(
         leadingIcon = { Icon(imageVector = inputType.icon, contentDescription = null) },
         label = { Text(text = inputType.label) },
         shape = Shapes().small,
-        colors = TextFieldDefaults.textFieldColors(
-            containerColor = Color.White,
-            focusedIndicatorColor = Color.Transparent,
-            unfocusedIndicatorColor = Color.Transparent,
-            disabledIndicatorColor = Color.Transparent,
-        ),
+//        colors = TextFieldDefaults.textFieldColors(
+//            containerColor = Color.White,
+//            focusedIndicatorColor = Color.Transparent,
+//            unfocusedIndicatorColor = Color.Transparent,
+//            disabledIndicatorColor = Color.Transparent,
+//        ),
         singleLine = true,
         keyboardOptions = inputType.keyboardOptions,
         visualTransformation = if (inputType is InputType.Password && !passwordVisible) {

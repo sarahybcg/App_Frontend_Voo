@@ -49,8 +49,8 @@ android {
 dependencies {
     // Otras dependencias
     implementation("androidx.core:core-ktx:1.13.1")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.4")
-    implementation("androidx.activity:activity-compose:1.9.1")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.5")
+    implementation("androidx.activity:activity-compose:1.9.2")
     implementation(platform("androidx.compose:compose-bom:2023.08.00"))
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-graphics")
@@ -70,30 +70,30 @@ dependencies {
 
     // MATERIAL 3
     implementation("com.google.android.material:material:1.12.0")
-    implementation("androidx.compose.material3:material3:1.2.1")
+    implementation("androidx.compose.material3:material3:1.3.0")
 
     // ICONS
-    implementation("androidx.compose.material:material-icons-core:1.7.0")
-    implementation("androidx.compose.material:material-icons-extended:1.6.8")
+    implementation("androidx.compose.material:material-icons-core:1.7.1")
+    implementation("androidx.compose.material:material-icons-extended:1.7.1")
 
     // LIFECYCLE RUNTIME
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.4")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.4")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.8.4")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.5")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.5")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.8.5")
     implementation("androidx.compose.runtime:runtime-livedata:1.7.0")// Asegúrate de usar la versión correcta de Compose
 
     // COIL (para imágenes)
     implementation("io.coil-kt:coil-compose:2.2.2")
 
     // UI
-    implementation("androidx.compose.ui:ui:1.7.0")
-    implementation("androidx.compose.foundation:foundation:1.7.0")
+    implementation("androidx.compose.ui:ui:1.7.1")
+    implementation("androidx.compose.foundation:foundation:1.7.1")
 
     // NAVIGATION
-    implementation("androidx.navigation:navigation-compose:2.7.7")
+    implementation("androidx.navigation:navigation-compose:2.8.0")
 
     // Otros componentes de UI
-    implementation("androidx.activity:activity-compose:1.9.1")
+    implementation("androidx.activity:activity-compose:1.9.2")
     implementation("androidx.webkit:webkit:1.11.0")
 
     // Retrofit y Gson
@@ -107,10 +107,10 @@ dependencies {
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1")
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
     //icons
-    implementation("androidx.compose.material:material-icons-extended:1.6.8")
+    implementation("androidx.compose.material:material-icons-extended:1.7.1")
 
     //localizacion
-    implementation("androidx.compose.material:material-icons-extended:1.6.8")
+    implementation("androidx.compose.material:material-icons-extended:1.7.1")
 
     // Mapbox
     implementation("com.mapbox.maps:android:11.6.0")
